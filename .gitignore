@@ -1,0 +1,4 @@
+zip_folder.spec
+__pycache__/
+build/
+dist/
