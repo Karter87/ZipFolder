@@ -1,0 +1,1 @@
+pyinstaller -F zip_folder.py --upx-dir C:\working_area\upx --icon=icon.ICO --version-file VERSION
