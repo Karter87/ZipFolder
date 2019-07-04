@@ -1,15 +1,9 @@
-# import required modules
- 
-#import os
 from os import scandir, path, walk 
-#import zipfile
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile, BadZipfile, ZIP_DEFLATED 
 from sys import exit
 
 def get_folders(directory):
     subfolders = [f.path for f in scandir(directory) if f.is_dir() ]
-    #for folder in subfolders:
-    #    print(folder)
     return subfolders
 
 def zip_folder(folder_path, output_path):
@@ -37,14 +31,13 @@ def zip_folder(folder_path, output_path):
                 print(f'--- Adding file {absolute_path} to archive')
                 zip_file.write(absolute_path, relative_path)
         print(f'ZipFile: {output_path} created succesfully')
-    
     except IOError as message:
         print(message)
         exit(1)
     except OSError as message:
         print(message)
         exit(1)
-    except zipfile.BadZipfile as message:
+    except BadZipfile as message:
         print(message)
         exit(1)
     finally:
@@ -66,7 +59,6 @@ def main():
             output_path = folder + '.zip'
             zip_folder(folder,output_path)
         input("\nPress ENTER to exit")
-
 
 if __name__ == '__main__':
     main()
